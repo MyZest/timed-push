@@ -7,8 +7,7 @@ const { Buffer } = require('buffer');
 const path = require('path');
 const TelegramBot = require('telegrambot');
 require('dotenv').config();
-console.log('process.env:', process.env);
-const api = new TelegramBot('6132861985:AAGOThDkgcBmBsDPvY4Qfob0sFvi_vL1F7I');
+const api = new TelegramBot(process.env.TELEGRAM_TOKEN);
 const defaultHeaders = {
   accept:
     'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -32,10 +31,10 @@ class createPools {
 
   async toMultithreading() {
     const tasks = [
-      'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/ss',
-      'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/ssr',
-      'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/v2',
-      'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/vless',
+      // 'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/ss',
+      // 'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/ssr',
+      // 'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/v2',
+      // 'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/vless',
       'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/all',
       'https://raw.fastgit.org/fanqiangfeee/freefq/main/v2ray',
     ];
