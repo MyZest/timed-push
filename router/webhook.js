@@ -42,8 +42,7 @@ module.exports = async (request, response) => {
         // reply_to_message_id: message_id,
         // }
       );
-      await bot.sendMessage(chatId, JSON.stringify(body));
-      await bot.sendMessage(message_id, JSON.stringify(body));
+      await bot.sendMessage('@timedPush', JSON.stringify(body));
     }
   } catch (error) {
     console.error(error);
