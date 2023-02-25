@@ -1,0 +1,56 @@
+name: CheckIp
+
+# on:
+#   schedule:
+#     - cron: '0 20 5 * *'
+#     # - cron: '*/60 * * * *'
+
+on:
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+  schedule:
+    - cron: '0 20 5 * *'
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  packages: write
+
+jobs:
+  getPool:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          # token: ${{ secrets.PUBLISH_TOKEN }}
+
+      - name: Set up nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: install
+        run: npm install
+
+      - name: run getPool
+        run: npm run getPool
+
+      # - name: detele
+      #   run: |
+      #     shopt -s extglob
+      #     rm -v .* !(get|.git) || true
+      #     rm -rf .github/ || true
+      #     rm -rf node_modules/ || true
+
+      # - name: Pushing to production branch
+      #   uses: actions-js/push@master
+      #   with:
+      #     github_token: ${{ secrets.PUBLISH_TOKEN }}
+      #     branch: 'main'
+      #     force: true
+      #     amend: true
+      #     repository: 'MrWang6w/Airport'

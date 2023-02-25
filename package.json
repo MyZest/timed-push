@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js "
+    "start": "node app.js",
+    "getPool": "node getPool.js"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +13,7 @@
   "dependencies": {
     "@vercel/node": "^2.5.11",
     "axios": "^0.27.2",
-    "cheerio": "^1.0.0-rc.10",
+    "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
     "dayjs": "^1.11.6",
     "dotenv": "^16.0.0",
@@ -20,7 +21,8 @@
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.2",
     "node-telegram-bot-api": "^0.56.0",
-    "telegrambot": "^0.1.0"
+    "telegrambot": "^0.1.0",
+    "tunnel": "0.0.6"
   },
   "bin": "app.js",
   "pkg": {
