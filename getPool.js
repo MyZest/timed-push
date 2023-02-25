@@ -8,6 +8,10 @@ const path = require('path');
 const TelegramBot = require('telegrambot');
 require('dotenv').config();
 const api = new TelegramBot(process.env.TELEGRAM_TOKEN);
+process.on('uncaughtException', function (err) {
+  console.log('err:', err);
+  return [];
+});
 const defaultHeaders = {
   accept:
     'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -50,9 +54,7 @@ class CreatePools {
     const encodedText = buf.toString('base64');
     // console.log(encodedText);
     this.text = encodedText;
-    try {
-      await this.toSend();
-    } catch (error) {}
+    await this.toSend();
   }
 
   async getIps(url) {
@@ -75,15 +77,17 @@ class CreatePools {
   async toSend() {
     let fileName = path.join(__dirname, './airport.txt');
     fs.writeFileSync(fileName, this.text, 'utf-8');
-    await api.sendMessage({
-      chat_id: '@timedPush',
-      text: `<pre>${this.text}</pre>`,
-      parse_mode: 'HTML',
-    });
-    await api.sendDocument({
-      chat_id: '@timedPush',
-      document: fs.readFileSync(fileName, 'utf-8'),
-    });
+    try {
+      await api.sendMessage({
+        chat_id: '@timedPush',
+        text: `<pre>${this.text}</pre>`,
+        parse_mode: 'HTML',
+      });
+      await api.sendDocument({
+        chat_id: '@timedPush',
+        document: fs.readFileSync(fileName, 'utf-8'),
+      });
+    } catch (error) {}
   }
 
   // toDeskop() {
