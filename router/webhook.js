@@ -18,7 +18,7 @@ module.exports = async (request, response) => {
         reply_to_message,
         message_id,
       } = body.message;
-
+      console.log('process.env.TELEGRAM_TOKEN:', process.env.TELEGRAM_TOKEN);
       const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
       let params = {
         id,
