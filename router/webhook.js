@@ -40,11 +40,6 @@ module.exports = async (request, response) => {
         reply_to_message_id: message_id,
       });
 
-      await api.sendDocument({
-        chat_id: '@timedPush',
-        text: '你好呀',
-        // document:
-      });
       await getPool();
     }
   } catch (error) {
