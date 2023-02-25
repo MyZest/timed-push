@@ -18,7 +18,6 @@ module.exports = async (request, response) => {
         reply_to_message,
         message_id,
       } = body.message;
-      console.log('process.env.TELEGRAM_TOKEN:', process.env.TELEGRAM_TOKEN);
       const bot = new TelegramBot(process.env.TELEGRAM_TOKEN);
       let params = {
         id,
@@ -30,16 +29,21 @@ module.exports = async (request, response) => {
         title,
         text,
         reply_to_message,
+        message_id,
       };
+
+      console.log('params:', params);
 
       await bot.sendMessage(
         id,
-        text
+        JSON.stringify(body)
         // {
         // parse_mode: 'HTML',
         // reply_to_message_id: message_id,
         // }
       );
+      await bot.sendMessage(chatId, JSON.stringify(body));
+      await bot.sendMessage(message_id, JSON.stringify(body));
     }
   } catch (error) {
     console.error(error);
