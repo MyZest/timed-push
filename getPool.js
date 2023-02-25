@@ -51,7 +51,9 @@ class createPools {
     const encodedText = buf.toString('base64');
     // console.log(encodedText);
     this.text = encodedText;
-    await this.toSend();
+    try {
+      await this.toSend();
+    } catch (error) {}
   }
 
   async getIps(url) {
@@ -74,6 +76,11 @@ class createPools {
   async toSend() {
     let fileName = path.join(__dirname, './airport.txt');
     fs.writeFileSync(fileName, this.text, 'utf-8');
+    await api.sendMessage({
+      chat_id: '@timedPush',
+      text: `<pre>${this.text}</pre>`,
+      parse_mode: 'HTML',
+    });
     await api.sendDocument({
       chat_id: '@timedPush',
       document: fs.readFileSync(fileName, 'utf-8'),
