@@ -24,7 +24,7 @@ const defaultHeaders = {
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
 };
 
-class createPools {
+class CreatePools {
   constructor() {
     this.text = '';
   }
@@ -93,6 +93,7 @@ class createPools {
   // }
 }
 
-const work = new createPools();
+const work = new CreatePools();
 work.toMultithreading();
-module.exports = work.toMultithreading;
+
+module.exports = CreatePools;

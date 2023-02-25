@@ -5,7 +5,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 //https://api.telegram.org/bot6132861985:AAGOThDkgcBmBsDPvY4Qfob0sFvi_vL1F7I/setWebhook?url=https://timed-push-5lfoatyjm-myzest.vercel.app/api/webhook
 const dirname = `${process.cwd()}`;
-const getPool = require('../getPool');
+const CreatePools = require('../getPool');
 
 module.exports = async (request, response) => {
   try {
@@ -39,8 +39,8 @@ module.exports = async (request, response) => {
         parse_mode: 'HTML',
         reply_to_message_id: message_id,
       });
-
-      await getPool();
+      const work = new CreatePools();
+      await work.toMultithreading();
     }
   } catch (error) {
     console.error(error);
