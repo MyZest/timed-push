@@ -1,0 +1,30 @@
+{
+  "name": "gateway-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.10",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "@vercel/node": "^2.5.11",
+    "node-telegram-bot-api": "^0.56.0",
+    "dotenv": "^16.0.0",
+    "node-fetch": "^2.6.2",
+    "lodash": "^4.17.21",
+    "dayjs": "^1.11.6"
+  },
+  "bin": "app.js",
+  "pkg": {
+    "assets": [
+      "static/**/*"
+    ]
+  }
+}
