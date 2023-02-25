@@ -7,6 +7,7 @@ const { Buffer } = require('buffer');
 const path = require('path');
 const TelegramBot = require('telegrambot');
 require('dotenv').config();
+const dirname = `${process.cwd()}`;
 const api = new TelegramBot(process.env.TELEGRAM_TOKEN);
 process.on('uncaughtException', function (err) {
   console.log('err:', err);
@@ -39,7 +40,7 @@ class CreatePools {
       // 'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/ssr',
       // 'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/v2',
       // 'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/vless',
-      'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/all',
+      // 'https://raw.fastgit.org/Leon406/SubCrawler/main/sub/share/all',
       'https://raw.fastgit.org/fanqiangfeee/freefq/main/v2ray',
     ];
     let text = '';
@@ -54,6 +55,7 @@ class CreatePools {
     const encodedText = buf.toString('base64');
     // console.log(encodedText);
     this.text = encodedText;
+
     await this.toSend();
   }
 
@@ -74,20 +76,43 @@ class CreatePools {
     }
   }
 
+  base64toFile(dataurl, filename = 'file') {
+    let arr = dataurl.split(',');
+    let mime = arr[0].match(/:(.*?);/)[1];
+    console.log('mime:', mime);
+    let suffix = mime.split('/')[1];
+    let bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    // 第三个参数是 要放到文件中的内容的 MIME 类型
+    return new File([u8arr], `${filename}.${suffix}`, {
+      type: mime,
+    });
+  }
+
   async toSend() {
-    let fileName = path.join(__dirname, './airport.txt');
-    fs.writeFileSync(fileName, this.text, 'utf-8');
+    // let fileName = path.join(__dirname, './airport.txt');
+    // fs.writeFileSync(fileName, this.text, 'utf-8');
+    // console.log('fileName:', fileName);
+    // const file = fs.createReadStream(fileName);
+
+    // const file = this.base64toFile();
     try {
+      console.log('process.env.TELEGRAM_TOKEN:', process.env.TELEGRAM_TOKEN);
       await api.sendMessage({
         chat_id: '@timedPush',
-        text: `<pre>${this.text}</pre>`,
-        parse_mode: 'HTML',
+        text: 'https://raw.githubusercontent.com/MrWang6w/Airport/main/get/airport.txt',
       });
-      await api.sendDocument({
+      await api.sendMessage({
         chat_id: '@timedPush',
-        document: fs.readFileSync(fileName, 'utf-8'),
+        text: this.text,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log('error:', error);
+    }
   }
 
   // toDeskop() {

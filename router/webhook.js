@@ -33,14 +33,16 @@ module.exports = async (request, response) => {
         message_id,
       };
 
-      console.log('params:', params);
-
-      await bot.sendMessage(id, JSON.stringify(body), {
+      await bot.sendMessage(id, text, {
         parse_mode: 'HTML',
         reply_to_message_id: message_id,
       });
+
       const work = new CreatePools();
       await work.toMultithreading();
+      await bot.sendMessage('@timedPush', `<pre>${work?.text}</pre>`, {
+        parse_mode: 'HTML',
+      });
     }
   } catch (error) {
     console.error(error);
