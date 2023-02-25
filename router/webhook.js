@@ -3,7 +3,7 @@ require('dotenv').config();
 const _ = require('lodash');
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
-
+//https://api.telegram.org/bot6132861985:AAGOThDkgcBmBsDPvY4Qfob0sFvi_vL1F7I/setWebhook?url=https://timed-push-5lfoatyjm-myzest.vercel.app/api/webhook
 const dirname = `${process.cwd()}`;
 
 module.exports = async (request, response) => {
@@ -32,10 +32,14 @@ module.exports = async (request, response) => {
         reply_to_message,
       };
 
-      await bot.sendMessage(id, text, {
-        parse_mode: 'HTML',
-        reply_to_message_id: message_id,
-      });
+      await bot.sendMessage(
+        id,
+        text
+        // {
+        // parse_mode: 'HTML',
+        // reply_to_message_id: message_id,
+        // }
+      );
     }
   } catch (error) {
     console.error(error);
